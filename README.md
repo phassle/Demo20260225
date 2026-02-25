@@ -46,37 +46,39 @@ Hooks / CI         →  FORCE it to happen          (automatic)
 ## File structure
 
 ```
-acme-api/
-├── CLAUDE.md                         ← Agent's onboarding (Boris workflow + rules)
-├── AcmeApi.sln                       ← Solution file
-├── .claude/
-│   ├── skills/                       ← Skills (with frontmatter)
-│   │   ├── plan-feature/SKILL.md     ← /plan-feature — Boris Plan phase
-│   │   ├── generate-tests/SKILL.md   ← /generate-tests — Boris Implement phase
-│   │   ├── simplify/SKILL.md         ← /simplify — Boris Simplify phase
-│   │   ├── review/                   ← /review — with examples/ subfolder
+.
+├── .claude/                              ← Claude Code configuration (project root)
+│   ├── skills/                           ← Skills (with frontmatter)
+│   │   ├── plan-feature/SKILL.md         ← /plan-feature — Boris Plan phase
+│   │   ├── generate-tests/SKILL.md       ← /generate-tests — Boris Implement phase
+│   │   ├── simplify/SKILL.md             ← /simplify — Boris Simplify phase
+│   │   ├── review/                       ← /review — with examples/ subfolder
 │   │   │   ├── SKILL.md
 │   │   │   └── examples/good-review.md
-│   │   ├── commit-push-pr/SKILL.md   ← /commit-push-pr — ship it
-│   │   ├── tdd/SKILL.md              ← Auto-activates on new features
-│   │   ├── pr-review/SKILL.md        ← Auto-activates on PR discussions
-│   │   ├── pr-summary/SKILL.md       ← Dynamic context: !`gh pr diff`
-│   │   ├── save-plan/SKILL.md        ← Save plan to GitHub Issue
-│   │   └── deep-research/SKILL.md    ← Sub-agent: context: fork + agent: Explore
+│   │   ├── commit-push-pr/SKILL.md       ← /commit-push-pr — ship it
+│   │   ├── tdd/SKILL.md                  ← Auto-activates on new features
+│   │   ├── pr-review/SKILL.md            ← Auto-activates on PR discussions
+│   │   ├── pr-summary/SKILL.md           ← Dynamic context: !`gh pr diff`
+│   │   ├── save-plan/SKILL.md            ← Save plan to GitHub Issue
+│   │   └── deep-research/SKILL.md        ← Sub-agent: context: fork + agent: Explore
 │   ├── agents/
-│   │   ├── planner.md                ← Creates GitHub Issues from plans
-│   │   ├── simplifier.md             ← Simplify phase: refactor + clean up
-│   │   └── reviewer.md               ← Verify phase reviewer
-│   ├── rules/                        ← Auto-loaded reference docs
+│   │   ├── planner.md                    ← Creates GitHub Issues from plans
+│   │   ├── simplifier.md                 ← Simplify phase: refactor + clean up
+│   │   └── reviewer.md                   ← Verify phase reviewer
+│   ├── rules/                            ← Auto-loaded reference docs
 │   │   ├── architecture.md
 │   │   └── testing.md
-│   └── settings.json                 ← Hooks + permissions (deny list)
-├── src/AcmeApi/
-│   ├── Program.cs                    ← Entry point + DI config
-│   ├── Controllers/                  ← API controllers (Products, Orders — Health created in demo)
-│   ├── Models/                       ← Entities + DTOs + in-memory stores
-│   └── Validators/                   ← FluentValidation validators
-└── tests/AcmeApi.Tests/              ← xUnit + FluentAssertions tests
+│   └── settings.json                     ← Hooks + permissions (deny list)
+├── acme-api/
+│   ├── CLAUDE.md                         ← Agent's onboarding (Boris workflow + rules)
+│   ├── AcmeApi.sln                       ← Solution file
+│   ├── src/AcmeApi/
+│   │   ├── Program.cs                    ← Entry point + DI config
+│   │   ├── Controllers/                  ← API controllers (Products, Orders — Health created in demo)
+│   │   ├── Models/                       ← Entities + DTOs + in-memory stores
+│   │   └── Validators/                   ← FluentValidation validators
+│   └── tests/AcmeApi.Tests/              ← xUnit + FluentAssertions tests
+└── README.md
 ```
 
 ## What to demo
