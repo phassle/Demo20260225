@@ -1,6 +1,6 @@
 # Workshop Demo — Acme Webshop API (.NET 8)
 
-Demo project for the **Agentic Development** workshop (Viedoc, 2026-02-25).
+Demo project for the **Agentic Development** workshop (2026-02-25).
 Everything you need is in `acme-api/`.
 
 ## Quick setup
