@@ -1,0 +1,46 @@
+{
+  "permissions": {
+    "allow": [
+      "dotnet test",
+      "dotnet build",
+      "dotnet build --warnaserror",
+      "dotnet build --warnaserror && dotnet test",
+      "dotnet run --project src/AcmeApi",
+      "dotnet format"
+    ],
+    "deny": [
+      "rm -rf",
+      "DROP TABLE",
+      "DELETE FROM",
+      "TRUNCATE",
+      "cat appsettings.Production.json",
+      "dotnet ef database drop",
+      "dotnet user-secrets list"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "dotnet format --include $FILE 2>/dev/null || true",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "dotnet build --warnaserror && dotnet test",
+            "timeout": 180
+          }
+        ]
+      }
+    ]
+  }
+}
