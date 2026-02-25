@@ -25,7 +25,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "dotnet format --include $FILE 2>/dev/null || true",
+            "command": "dotnet format \"$CLAUDE_PROJECT_DIR/acme-api/AcmeApi.sln\" --include $FILE 2>/dev/null || true",
             "timeout": 30
           }
         ]
@@ -36,7 +36,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "dotnet build --warnaserror && dotnet test",
+            "command": "dotnet build \"$CLAUDE_PROJECT_DIR/acme-api/AcmeApi.sln\" --warnaserror && dotnet test \"$CLAUDE_PROJECT_DIR/acme-api/AcmeApi.sln\"",
             "timeout": 180
           }
         ]

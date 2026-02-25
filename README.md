@@ -25,7 +25,7 @@ Start from an existing GitHub Issue, plan it, work phase by phase, and update th
 | **Save plan** | `/save-plan #12` | Writes phases back to issue as checkboxes |
 | **Implement** | `/generate-tests discount codes` | TDD: RED → GREEN → repeat, `/save-plan #12` after each phase |
 | **Simplify** | `/simplify src/AcmeApi/Controllers/DiscountsController.cs` | Remove over-engineering, improve names |
-| **Verify** | `dotnet build --warnaserror && dotnet test` | Build + test (also runs on Stop hook) |
+| **Verify** | `/verify` | Build + test + code review (also runs on Stop hook) |
 | **Done** | `/save-plan #12` | Mark all phases done, hand off or ship |
 
 ## Three layers of control
@@ -59,6 +59,7 @@ Hooks / CI         →  FORCE it to happen          (automatic)
 │   │   ├── tdd/SKILL.md                  ← Auto-activates on new features
 │   │   ├── pr-review/SKILL.md            ← Auto-activates on PR discussions
 │   │   ├── pr-summary/SKILL.md           ← Dynamic context: !`gh pr diff`
+│   │   ├── verify/SKILL.md               ← /verify — Boris Verify phase (build + test + review)
 │   │   ├── save-plan/SKILL.md            ← Save plan to GitHub Issue
 │   │   └── deep-research/SKILL.md        ← Sub-agent: context: fork + agent: Explore
 │   ├── agents/
@@ -112,7 +113,7 @@ Hooks / CI         →  FORCE it to happen          (automatic)
 | Planner agent | `claude --agent planner "Add discount codes"` |
 | Reviewer agent | `claude --agent reviewer` after changes |
 | Parallel agents | 3 terminals with different tasks |
-| Boris workflow | `/plan-feature` → `/generate-tests` → `/simplify` → verify |
+| Boris workflow | `/plan-feature` → `/generate-tests` → `/simplify` → `/verify` |
 
 ## Example prompts
 
