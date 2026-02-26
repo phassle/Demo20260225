@@ -41,6 +41,7 @@ acme-api/
 | Method | Route              | Controller                          | Purpose         |
 |--------|--------------------|-------------------------------------|-----------------|
 | GET    | /api/health        | HealthController.cs:9               | Health check    |
+| GET    | /api/status        | StatusController.cs:22              | App status info |
 | GET    | /api/products      | ProductsController.cs:18            | List products   |
 | GET    | /api/products/{id} | ProductsController.cs:25            | Get by ID       |
 | POST   | /api/products      | ProductsController.cs:40            | Create product  |
@@ -56,6 +57,7 @@ All paths relative to `acme-api/src/AcmeApi/Controllers/`.
 **Entity/DTO separation** — Entities are internal (`ProductEntity`, `OrderEntity`). API returns records (`ProductDto`, `OrderDto`). Mapping lives in each controller's private `MapToDto` method.
 - Product model: `Models/Product.cs:6` (entity), `:18` (DTO), `:23` (request)
 - Order model: `Models/Order.cs:15` (entity), `:32` (DTO), `:37` (request)
+- Status model: `Models/Status.cs:4` (DTO only, no entity or request)
 
 **Validation** — All input validated via FluentValidation. Validators auto-registered at `Program.cs:9`. Never use `[Required]` alone.
 - Product rules: `Validators/CreateProductValidator.cs:8` — name, price > 0, category enum
