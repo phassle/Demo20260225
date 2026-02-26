@@ -58,6 +58,31 @@ public class ProductsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
     }
 
+    [HttpDelete("{id}")]
+    public IActionResult Delete(Guid id)
+    {
+        _logger.LogInformation("Deleting product with id: {ProductId}", id);
+
+        var product = ProductStore.Products.FirstOrDefault(p => p.Id == id);
+        if (product == null)
+        {
+            _logger.LogWarning("Product not found with id: {ProductId}", id);
+            return NotFound(new { error = $"Product with id {id} not found" });
+        }
+
+        var isReferenced = OrderStore.Orders
+            .Any(o => o.Items.Any(i => i.ProductId == id));
+        if (isReferenced)
+        {
+            _logger.LogWarning("Cannot delete product {ProductId} — referenced in existing orders", id);
+            return Conflict(new { error = "Cannot delete product that is referenced in existing orders" });
+        }
+
+        ProductStore.Products.Remove(product);
+        _logger.LogInformation("Product deleted: {ProductId}", id);
+        return NoContent();
+    }
+
     private static ProductDto MapToDto(ProductEntity entity)
     {
         return new ProductDto(entity.Id, entity.Name, entity.Price, entity.Category, entity.InStock);
